@@ -1,10 +1,11 @@
 .sidenav {
-  width: 300px;
+  width: 200px;
+  margin-left: -300px;
   height: calc(100vh - 65px);
   transition: .5s;
 
-  &.isVisiable {
-    margin-left: -300px;
+  &.isVisible {
+    margin-left: -0;
   }
 
   &-nav {

@@ -6,5 +6,11 @@ import { Component } from '@angular/core';
   styleUrls: ['./main.component.scss'],
 })
 export default class MainComponent {
+  links = ['To come', 'Overdue', 'Done'];
 
+  activeLink = this.links[0];
+
+  changeFilter(link: string) {
+    this.activeLink = link;
+  }
 }
