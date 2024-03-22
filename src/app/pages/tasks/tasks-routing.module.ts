@@ -3,11 +3,11 @@ import { RouterModule, Routes } from '@angular/router';
 import TaskItemsComponent from './component/task-items/task-items.component';
 
 const routes: Routes = [{
-  path: '', component: TaskItemsComponent
+  path: '', component: TaskItemsComponent,
 }];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
 export default class TasksRoutingModule { }

@@ -1,25 +1,26 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import HeaderService from '../../services/header.service';
 
 @Component({
   selector: 'app-sidenav',
   templateUrl: './sidenav.component.html',
-  styleUrls: ['./sidenav.component.scss']
+  styleUrls: ['./sidenav.component.scss'],
 })
 export default class SidenavComponent {
   collapsed = false;
+
   navData = [
     {
       routeLink: 'main',
-      label: 'main',
-      icon: 'home'
+      label: 'Main',
+      icon: 'home',
     },
     {
       routeLink: 'tasks',
-      label: 'tasks',
-      icon: 'check_circle_outline'
-    }
+      label: 'My tasks',
+      icon: 'check_circle_outline',
+    },
   ];
 
-  constructor(private router: Router) {}
+  constructor(public headerService: HeaderService) {}
 }
