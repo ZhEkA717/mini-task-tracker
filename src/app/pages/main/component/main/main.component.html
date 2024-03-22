@@ -1,7 +1,7 @@
 <div class="container">
   <div class="main">
-    <div class="main__data">Пятница, 22 Март</div>
-    <div class="main__hello">Good evening, User</div>
+    <div class="main__data">{{date | date: 'EEEE, dd MMMM'}}</div>
+    <div class="main__hello">{{'Good ' + period + ', User'}}</div>
     <div class="main__tasks">
       <div class="wrapper">
         <mat-icon class="main__tasks__icon">person icon</mat-icon>
