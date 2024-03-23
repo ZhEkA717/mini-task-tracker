@@ -4,6 +4,11 @@
   height: calc(100vh - 65px);
   transition: .5s;
 
+  @media (max-width: 700px) {
+    position: absolute;
+    z-index: 2;
+  }
+
   &.isVisible {
     margin-left: -0;
   }

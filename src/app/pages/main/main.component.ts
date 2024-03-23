@@ -18,7 +18,7 @@ export default class MainComponent implements OnInit, OnDestroy {
 
   activeLink = this.links[0];
 
-  period!: (typeof DatePeriod)[keyof typeof DatePeriod];
+  period: (typeof DatePeriod)[keyof typeof DatePeriod] = this.getPeriod();
 
   tasks: Task[] = [];
 
@@ -27,19 +27,23 @@ export default class MainComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.timerId = setInterval(() => {
       this.date = new Date();
-
-      const hour = this.date.getHours();
-
-      if (hour > 0 && hour < 6) {
-        this.period = DatePeriod.NIGHT;
-      } else if (hour > 6 && hour < 12) {
-        this.period = DatePeriod.MORNING;
-      } else if (hour > 12 && hour < 18) {
-        this.period = DatePeriod.AFTERNOON;
-      } else {
-        this.period = DatePeriod.EVENING;
-      }
+      this.getPeriod();
     });
+  }
+
+  getPeriod() {
+    const hour = this.date.getHours();
+    if (hour >= 0 && hour <= 6) {
+      this.period = DatePeriod.NIGHT;
+    } else if (hour > 6 && hour <= 12) {
+      this.period = DatePeriod.MORNING;
+    } else if (hour > 12 && hour <= 18) {
+      this.period = DatePeriod.AFTERNOON;
+    } else {
+      this.period = DatePeriod.EVENING;
+    }
+
+    return this.period;
   }
 
   ngOnDestroy(): void {
