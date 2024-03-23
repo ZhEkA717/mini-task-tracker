@@ -1,4 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import HttpApiService from 'src/app/core/services/http-api.service';
+import { Task } from 'src/app/shared/models/task.model';
 import { DatePeriod } from 'src/app/shared/utils/constants';
 
 @Component({
@@ -17,6 +19,10 @@ export default class MainComponent implements OnInit, OnDestroy {
   activeLink = this.links[0];
 
   period!: (typeof DatePeriod)[keyof typeof DatePeriod];
+
+  tasks: Task[] = [];
+
+  constructor(private readonly httpApiService: HttpApiService) {}
 
   ngOnInit(): void {
     this.timerId = setInterval(() => {

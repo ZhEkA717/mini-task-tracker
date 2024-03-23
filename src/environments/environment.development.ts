@@ -1,4 +1,4 @@
 export default {
   production: false,
-  apiUrl: 'http://localhost',
+  apiUrl: 'http://localhost:4000/',
 };
