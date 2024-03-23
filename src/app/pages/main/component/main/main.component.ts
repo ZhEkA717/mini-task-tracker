@@ -10,7 +10,7 @@ import { DatePeriod } from 'src/app/shared/utils/constants';
 export default class MainComponent implements OnInit, OnDestroy {
   date = new Date();
 
-  timerId!: ReturnType<typeof setTimeout>;;
+  timerId!: ReturnType<typeof setTimeout>;
 
   links = ['To come', 'Overdue', 'Done'];
 
@@ -18,14 +18,13 @@ export default class MainComponent implements OnInit, OnDestroy {
 
   period!: (typeof DatePeriod)[keyof typeof DatePeriod];
 
-
   ngOnInit(): void {
     this.timerId = setInterval(() => {
       this.date = new Date();
 
-      let hour = this.date.getHours();
+      const hour = this.date.getHours();
 
-      if (hour > 0 &&  hour < 6) {
+      if (hour > 0 && hour < 6) {
         this.period = DatePeriod.NIGHT;
       } else if (hour > 6 && hour < 12) {
         this.period = DatePeriod.MORNING;
@@ -34,8 +33,7 @@ export default class MainComponent implements OnInit, OnDestroy {
       } else {
         this.period = DatePeriod.EVENING;
       }
-
-    })
+    });
   }
 
   ngOnDestroy(): void {

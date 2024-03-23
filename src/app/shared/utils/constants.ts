@@ -1,6 +1,6 @@
 export enum DatePeriod {
-  MORNING = "morning",
+  MORNING = 'morning',
   AFTERNOON = 'afternoon',
-  EVENING ='evening',
-  NIGHT='night'
+  EVENING = 'evening',
+  NIGHT = 'night',
 }
