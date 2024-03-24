@@ -1,5 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
 import HttpApiService from 'src/app/core/services/http-api.service';
+import { createTask, getAllTask, getTask, updateTask } from 'src/app/redux/actions/task.action';
 import { Task } from 'src/app/shared/models/task.model';
 import { DatePeriod } from 'src/app/shared/utils/constants';
 
@@ -22,9 +24,11 @@ export default class MainComponent implements OnInit, OnDestroy {
 
   tasks: Task[] = [];
 
-  constructor(private readonly httpApiService: HttpApiService) {}
+  constructor(private store: Store) {}
 
   ngOnInit(): void {
+    this.store.dispatch(getAllTask());
+
     this.timerId = setInterval(() => {
       this.date = new Date();
       this.getPeriod();
@@ -48,6 +52,10 @@ export default class MainComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     clearInterval(this.timerId);
+  }
+
+  createTask() {
+    this.store.dispatch(getTask({id: '2f367e10-146a-4698-bfff-6ead52c533ac'}));
   }
 
   changeFilter(link: string) {
