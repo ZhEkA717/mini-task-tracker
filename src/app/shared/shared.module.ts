@@ -9,9 +9,16 @@ import { MatCardModule } from '@angular/material/card';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatDividerModule } from '@angular/material/divider';
 import { FormsModule } from '@angular/forms';
+import TaskDonePipe from './pipes/task-done.pipe';
+import { TaskOverduoPipe } from './pipes/task-overdue.pipe';
+import { TaskComePipe } from './pipes/task-come.pipe';
 
 @NgModule({
-  declarations: [],
+  declarations: [
+    TaskDonePipe,
+    TaskOverduoPipe,
+    TaskComePipe
+  ],
   imports: [
     CommonModule,
     FormsModule,
@@ -32,6 +39,9 @@ import { FormsModule } from '@angular/forms';
     MatCardModule,
     MatTabsModule,
     MatDividerModule,
+    TaskDonePipe,
+    TaskOverduoPipe,
+    TaskComePipe
   ],
 })
 export default class SharedModule { }
