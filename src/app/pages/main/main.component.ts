@@ -3,7 +3,7 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { createTask, getAllTask, updateTask } from 'src/app/redux/actions/task.action';
 import { selectAllTasks } from 'src/app/redux/selectors/task.selector';
-import { CreateTaskDto, Task, defaultTaskDto } from 'src/app/shared/models/task.model';
+import { Task, defaultTaskDto } from 'src/app/shared/models/task.model';
 import { DatePeriod } from 'src/app/shared/utils/constants';
 
 @Component({
@@ -21,12 +21,15 @@ export default class MainComponent implements OnInit, OnDestroy {
 
   activeLink = this.links[0];
 
+  addTaskVisiable = false;
+
   period: (typeof DatePeriod)[keyof typeof DatePeriod] = this.getPeriod();
 
   tasks$!: Observable<Task[]>;
 
   taskTitle: string = '';
   taskDeadline!: Date | null;
+
 
   constructor(private store: Store) {}
 
@@ -74,9 +77,16 @@ export default class MainComponent implements OnInit, OnDestroy {
     }, id}))
   }
 
+  visibleControl() {
+    this.addTaskVisiable = !this.addTaskVisiable;
+  }
 
+  addFocus(el: HTMLInputElement) {
+    el.focus();
+  }
 
-  createTask() {
+  createTask(event: boolean) {
+    this.visibleControl();
     this.store.dispatch(createTask({dto: {
       ...defaultTaskDto,
       title: this.taskTitle,

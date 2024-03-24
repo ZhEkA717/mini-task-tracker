@@ -3,10 +3,12 @@
   <div class="task__wrapper">
     <div class="task__checkbox">✓</div>
     <input
+      #inputControl
       placeholder="Write the name of the task"
       type="text" class="task__input"
       [(ngModel)]="title"
       (input)="updateInputValue()"
+      (keypress)="createTask($event)"
     >
   </div>
   <div (click)="isVisible=!isVisible" class="task__deadline">
@@ -14,5 +16,8 @@
   </div>
 </div>
 <mat-card *ngIf="isVisible" class="demo-inline-calendar-card">
-  <mat-calendar (selectedChange)="select($event)" [(selected)]="deadline"></mat-calendar>
+  <mat-calendar
+    (selectedChange)="select($event)"
+    [(selected)]="deadline"
+  ></mat-calendar>
 </mat-card>

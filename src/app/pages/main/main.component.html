@@ -20,17 +20,23 @@
       <mat-divider></mat-divider>
       <mat-tab-nav-panel #tabPanel></mat-tab-nav-panel>
 
-      <button (click)="createTask()" class="main__tasks__button">
+      <button (click)="visibleControl()" class="main__tasks__button">
         <span>+</span>
         <span>Create task</span>
       </button>
       <app-add-task
+        *ngIf="addTaskVisiable"
         (inputValueEvent)="setInputValue($event)"
         (selectedEvent)="setSelected($event)"
+        (inputControlEvent)="addFocus($event)"
+        (blurEvent)="createTask($event )"
       ></app-add-task>
       <div *ngIf="tasks$ | async as tasks">
         <app-task
-          *ngFor="let task of tasks"
+          *ngFor="let task of tasks
+            | taskDone: this.activeLink
+            | taskOverduo: this.activeLink
+            | taskCome: this.activeLink"
           [task]="task"
           (statusEvent)="setStatus($event)"
           ></app-task>
