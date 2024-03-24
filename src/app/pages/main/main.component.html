@@ -24,11 +24,17 @@
         <span>+</span>
         <span>Create task</span>
       </button>
-      <app-add-task></app-add-task>
-      <app-task></app-task>
-      <app-task></app-task>
-      <app-task></app-task>
-      <app-task></app-task>
+      <app-add-task
+        (inputValueEvent)="setInputValue($event)"
+        (selectedEvent)="setSelected($event)"
+      ></app-add-task>
+      <div *ngIf="tasks$ | async as tasks">
+        <app-task
+          *ngFor="let task of tasks"
+          [task]="task"
+          (statusEvent)="setStatus($event)"
+          ></app-task>
+      </div>
     </div>
   </div>
 </div>

@@ -1,8 +1,9 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import HttpApiService from 'src/app/core/services/http-api.service';
-import { createTask, getAllTask, getTask, updateTask } from 'src/app/redux/actions/task.action';
-import { Task } from 'src/app/shared/models/task.model';
+import { Observable } from 'rxjs';
+import { createTask, getAllTask, updateTask } from 'src/app/redux/actions/task.action';
+import { selectAllTasks } from 'src/app/redux/selectors/task.selector';
+import { CreateTaskDto, Task, defaultTaskDto } from 'src/app/shared/models/task.model';
 import { DatePeriod } from 'src/app/shared/utils/constants';
 
 @Component({
@@ -22,12 +23,16 @@ export default class MainComponent implements OnInit, OnDestroy {
 
   period: (typeof DatePeriod)[keyof typeof DatePeriod] = this.getPeriod();
 
-  tasks: Task[] = [];
+  tasks$!: Observable<Task[]>;
+
+  taskTitle: string = '';
+  taskDeadline!: Date | null;
 
   constructor(private store: Store) {}
 
   ngOnInit(): void {
     this.store.dispatch(getAllTask());
+    this.tasks$  = this.store.select(selectAllTasks);
 
     this.timerId = setInterval(() => {
       this.date = new Date();
@@ -54,8 +59,29 @@ export default class MainComponent implements OnInit, OnDestroy {
     clearInterval(this.timerId);
   }
 
+  setInputValue(title: string) {
+    this.taskTitle = title;
+  }
+
+  setSelected(deadline: Date|null) {
+    this.taskDeadline = deadline;
+  }
+
+  setStatus(task: Task) {
+    const {id, status} = task;
+    this.store.dispatch(updateTask({dto: {
+      ...task, status: !status,
+    }, id}))
+  }
+
+
+
   createTask() {
-    this.store.dispatch(getTask({id: '2f367e10-146a-4698-bfff-6ead52c533ac'}));
+    this.store.dispatch(createTask({dto: {
+      ...defaultTaskDto,
+      title: this.taskTitle,
+      deadline: this.taskDeadline ? this.taskDeadline?.valueOf() : null
+    }}))
   }
 
   changeFilter(link: string) {

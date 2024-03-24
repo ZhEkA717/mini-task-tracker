@@ -2,12 +2,17 @@
 <div class="task">
   <div class="task__wrapper">
     <div class="task__checkbox">✓</div>
-    <input focused placeholder="Write the name of the task" type="text" class="task__input">
+    <input
+      placeholder="Write the name of the task"
+      type="text" class="task__input"
+      [(ngModel)]="title"
+      (input)="updateInputValue()"
+    >
   </div>
   <div (click)="isVisible=!isVisible" class="task__deadline">
     <mat-datepicker-toggle></mat-datepicker-toggle>
   </div>
 </div>
 <mat-card *ngIf="isVisible" class="demo-inline-calendar-card">
-  <mat-calendar [(selected)]="selected"></mat-calendar>
+  <mat-calendar (selectedChange)="select($event)" [(selected)]="deadline"></mat-calendar>
 </mat-card>

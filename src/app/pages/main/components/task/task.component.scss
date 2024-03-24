@@ -35,7 +35,7 @@
     font-weight: 600;
     transition: .3s;
 
-    &:hover {
+    &:hover, &.done {
       opacity: 1;
       border-color: green;
       color: green;
