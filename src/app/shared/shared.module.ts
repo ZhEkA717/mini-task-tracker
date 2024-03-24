@@ -8,11 +8,13 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatCardModule } from '@angular/material/card';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatDividerModule } from '@angular/material/divider';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [],
   imports: [
     CommonModule,
+    FormsModule,
     MatToolbarModule,
     MatIconModule,
     MatButtonModule,
@@ -22,6 +24,7 @@ import { MatDividerModule } from '@angular/material/divider';
     MatDividerModule,
   ],
   exports: [
+    FormsModule,
     MatToolbarModule,
     MatIconModule,
     MatButtonModule,
