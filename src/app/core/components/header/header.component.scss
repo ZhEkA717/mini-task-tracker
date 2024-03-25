@@ -1,0 +1,18 @@
+.header {
+  height: 65px;
+
+  .spacer {
+    flex: 1 1 auto;
+  }
+
+  &-logo {
+    margin-left: 10px;
+    cursor: pointer;
+  }
+}
+
+.loading-progress-bar {
+  position: absolute;
+  top: 65px;
+  width: 100%;
+}

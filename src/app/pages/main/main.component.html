@@ -1,0 +1,47 @@
+<div class="container">
+  <div class="main">
+    <div class="main__data">{{date | date: 'EEEE, dd MMMM'}}</div>
+    <div class="main__hello">{{'Good ' + period + ', User'}}</div>
+    <div class="main__tasks">
+      <div class="wrapper">
+        <mat-icon class="main__tasks__icon">person icon</mat-icon>
+        <a [routerLink]="['/tasks']" class="main__tasks__title">My tasks</a>
+        <mat-icon class="main__tasks__lock">lock</mat-icon>
+      </div>
+      <nav
+        mat-tab-nav-bar
+        class="main__tasks__filters"
+        [tabPanel]="tabPanel"
+      >
+        <a mat-tab-link *ngFor="let link of links"
+        (click)="changeFilter(link)"
+        [active]="activeLink === link"> {{link}} </a>
+      </nav>
+      <mat-divider></mat-divider>
+      <mat-tab-nav-panel #tabPanel></mat-tab-nav-panel>
+
+      <button (click)="visibleControl()" class="main__tasks__button">
+        <span>+</span>
+        <span>Create task</span>
+      </button>
+      <app-add-task
+        *ngIf="addTaskVisiable"
+        (inputValueEvent)="setInputValue($event)"
+        (selectedEvent)="setSelected($event)"
+        (inputControlEvent)="addFocus($event)"
+        (blurEvent)="createTask()"
+      ></app-add-task>
+      <div class="wrapper-tasks">
+        <app-task
+          *ngFor="let task of tasks
+          | taskDone: this.activeLink
+          | taskOverdue: this.activeLink
+          | taskCome: this.activeLink; index as i"
+          [task]="task"
+          (click)="openTask($event, task.id)"
+          (statusEvent)="setStatus($event)"
+        ></app-task>
+      </div>
+    </div>
+  </div>
+</div>
