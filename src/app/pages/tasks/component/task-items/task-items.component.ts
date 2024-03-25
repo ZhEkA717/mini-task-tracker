@@ -7,7 +7,7 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { getAllTask, updateAllTask, updateTask } from 'src/app/redux/actions/task.action';
 import { selectAllTasks } from 'src/app/redux/selectors/task.selector';
-import { Task } from 'src/app/shared/models/task.model';
+import { Task, TypePriority } from 'src/app/shared/models/task.model';
 import { Sort } from '@angular/material/sort';
 @Component({
   selector: 'app-task-items',
@@ -89,7 +89,9 @@ export default class TaskItemsComponent implements OnInit {
     this.sortedData = data.sort((a, b) => {
       switch(sort.active) {
         case 'status':
-          return this.compareStatus(a.status, b.status, isAsc);
+          return this.compare(a.status, b.status, isAsc);
+        case 'deadline':
+          return this.compareDate(a.deadline, b.deadline, isAsc);
         default:
           return 0;
       }
@@ -98,7 +100,14 @@ export default class TaskItemsComponent implements OnInit {
     this.dataSource.data = this.sortedData;
   }
 
-  compareStatus(a: boolean, b: boolean, isAsc: boolean) {
+  compare(a: boolean | TypePriority, b: boolean | TypePriority, isAsc: boolean) {
     return ((a === b)? 0 : a? -1 : 1) * (isAsc ? 1 : -1);;
+  }
+
+  compareDate(a: number | null, b: number | null, isAsc: boolean) {
+    const distantFuture = new Date(8640000000000000)
+    let dateA = a ? new Date(a) : distantFuture;
+    let dateB = b ? new Date(b) : distantFuture;
+    return (dateA.valueOf() - dateB.valueOf()) * (isAsc ? 1 : -1);
   }
 }
