@@ -18,7 +18,7 @@ import TaskDonePipe from './pipes/task-done.pipe';
 import TaskOverduoPipe from './pipes/task-overdue.pipe';
 import TaskComePipe from './pipes/task-come.pipe';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
-
+import { MatSortModule } from '@angular/material/sort';
 @NgModule({
   declarations: [
     TaskDonePipe,
@@ -41,6 +41,7 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle';
     MatTableModule,
     MatCheckboxModule,
     MatButtonToggleModule,
+    MatSortModule,
   ],
   exports: [
     FormsModule,
@@ -60,6 +61,7 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle';
     MatTableModule,
     MatCheckboxModule,
     MatButtonToggleModule,
+    MatSortModule
   ],
 })
 export default class SharedModule { }

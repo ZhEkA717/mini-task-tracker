@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 import { getAllTask, updateAllTask, updateTask } from 'src/app/redux/actions/task.action';
 import { selectAllTasks } from 'src/app/redux/selectors/task.selector';
 import { Task } from 'src/app/shared/models/task.model';
-
+import { Sort } from '@angular/material/sort';
 @Component({
   selector: 'app-task-items',
   templateUrl: './task-items.component.html',
@@ -27,6 +27,10 @@ export default class TaskItemsComponent implements OnInit {
 
   tasks$: Observable<Task[]> = this.store.select(selectAllTasks);
 
+  tasks!: Task[];
+
+  sortedData!: Task[];
+
   constructor(
     private store: Store,
     private router: Router,
@@ -36,6 +40,8 @@ export default class TaskItemsComponent implements OnInit {
     this.store.dispatch(getAllTask());
     this.tasks$.subscribe((tasks) => {
       this.dataSource.data = tasks;
+      this.tasks = tasks;
+      this.sortedData = tasks.slice();
     });
   }
 
@@ -75,5 +81,24 @@ export default class TaskItemsComponent implements OnInit {
       return `${this.isAllSelected() ? 'deselect' : 'select'} all`;
     }
     return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row.id}`;
+  }
+
+  sortData(sort: Sort) {
+    const data = this.tasks.slice();
+    const isAsc = sort.direction === 'asc';
+    this.sortedData = data.sort((a, b) => {
+      switch(sort.active) {
+        case 'status':
+          return this.compareStatus(a.status, b.status, isAsc);
+        default:
+          return 0;
+      }
+    })
+
+    this.dataSource.data = this.sortedData;
+  }
+
+  compareStatus(a: boolean, b: boolean, isAsc: boolean) {
+    return ((a === b)? 0 : a? -1 : 1) * (isAsc ? 1 : -1);;
   }
 }
