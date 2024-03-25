@@ -38,9 +38,7 @@ export default class TaskDetailComponent implements OnInit, OnDestroy {
       this.task = task;
       this.titleValue = task.title;
     });
-    this.loadingSub = this.loading$.subscribe((loading) => {
-      this.loading = loading;
-    });
+
     this.deadline = this.task.deadline ? new Date(this.task.deadline) : undefined;
   }
 

@@ -1,7 +1,10 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { Observable, Subscription } from 'rxjs';
+import {
+  Observable,
+  Subscription,
+} from 'rxjs';
 import { createTask, getAllTask, updateTask } from 'src/app/redux/actions/task.action';
 import { selectAllTasks, selectLoading } from 'src/app/redux/selectors/task.selector';
 import { Task, defaultTaskDto } from 'src/app/shared/models/task.model';
@@ -62,7 +65,7 @@ export default class MainComponent implements OnInit, OnDestroy {
 
   openTask(event: Event, id: string) {
     const el = event.target as HTMLElement;
-    if (el.classList.contains('task')) this.router.navigate(['/main', id]);
+    if (!el.classList.contains('task__checkbox')) this.router.navigate(['/main', id]);
   }
 
   setInputValue(title: string) {
@@ -94,8 +97,8 @@ export default class MainComponent implements OnInit, OnDestroy {
     el.focus();
   }
 
-  createTask(event: boolean) {
-    this.addTaskVisiable = event;
+  createTask() {
+    this.visibleControl();
     if (!this.loading) {
       this.store.dispatch(createTask({
         dto: {

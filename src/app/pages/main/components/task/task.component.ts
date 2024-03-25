@@ -1,4 +1,10 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+} from '@angular/core';
 import { Task } from 'src/app/shared/models/task.model';
 
 @Component({
@@ -10,6 +16,7 @@ export default class TaskComponent implements OnInit {
   deadline: Date | undefined;
 
   @Input() task: Task = <Task>{};
+
   @Output() statusEvent = new EventEmitter<Task>();
 
   ngOnInit(): void {

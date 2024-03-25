@@ -1,4 +1,3 @@
-<mat-progress-bar *ngIf="loading" mode="indeterminate"></mat-progress-bar>
 <div class="container">
   <div class="main">
     <div class="main__data">{{date | date: 'EEEE, dd MMMM'}}</div>
@@ -30,7 +29,7 @@
         (inputValueEvent)="setInputValue($event)"
         (selectedEvent)="setSelected($event)"
         (inputControlEvent)="addFocus($event)"
-        (blurEvent)="createTask($event )"
+        (blurEvent)="createTask()"
       ></app-add-task>
       <div class="wrapper-tasks" *ngIf="tasks$ | async as tasks">
         <app-task
