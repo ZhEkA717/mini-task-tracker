@@ -6,6 +6,13 @@
   width: 80%;
   margin: 20px auto;
   padding: 20px;
+  position: relative;
+
+  &__remove {
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+  }
 
 
   &__field {

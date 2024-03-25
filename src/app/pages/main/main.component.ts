@@ -1,8 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable, Subscription } from 'rxjs';
-import { createTask, getAllTask, getTask, updateTask } from 'src/app/redux/actions/task.action';
+import { createTask, getAllTask, updateTask } from 'src/app/redux/actions/task.action';
 import { selectAllTasks, selectLoading } from 'src/app/redux/selectors/task.selector';
 import { Task, defaultTaskDto } from 'src/app/shared/models/task.model';
 import { DatePeriod } from 'src/app/shared/utils/constants';
@@ -30,11 +30,12 @@ export default class MainComponent implements OnInit, OnDestroy {
 
   loading$: Observable<boolean> = this.store.select(selectLoading);
 
-  loading: boolean = false;
+  loading = false;
 
   subLoading!: Subscription;
 
-  taskTitle: string = '';
+  taskTitle = '';
+
   taskDeadline!: Date | null;
 
   constructor(
@@ -46,7 +47,7 @@ export default class MainComponent implements OnInit, OnDestroy {
     this.store.dispatch(getAllTask());
     this.subLoading = this.loading$.subscribe((loading) => {
       this.loading = loading;
-    })
+    });
 
     this.timerId = setInterval(() => {
       this.date = new Date();
@@ -59,43 +60,51 @@ export default class MainComponent implements OnInit, OnDestroy {
     this.subLoading?.unsubscribe();
   }
 
-  openTask(event: Event,id: string) {
+  openTask(event: Event, id: string) {
     const el = event.target as HTMLElement;
-    if (el.classList.contains('task'))
-      this.router.navigate(['/main', id]);
+    if (el.classList.contains('task')) this.router.navigate(['/main', id]);
   }
-
 
   setInputValue(title: string) {
     this.taskTitle = title;
   }
 
-  setSelected(deadline: Date|null) {
+  setSelected(deadline: Date | null) {
     this.taskDeadline = deadline;
   }
 
   setStatus(task: Task) {
-    const {id, status} = task;
-    this.store.dispatch(updateTask({dto: {
-      ...task, status: !status,
-    }, id}))
+    const { id, status } = task;
+    if (!this.loading) {
+      this.store.dispatch(updateTask({
+        dto: {
+          ...task, status: !status,
+        },
+        id,
+      }));
+    }
   }
 
   visibleControl() {
     this.addTaskVisiable = !this.addTaskVisiable;
   }
 
+  // eslint-disable-next-line class-methods-use-this
   addFocus(el: HTMLInputElement) {
     el.focus();
   }
 
   createTask(event: boolean) {
     this.addTaskVisiable = event;
-    this.store.dispatch(createTask({dto: {
-      ...defaultTaskDto,
-      title: this.taskTitle,
-      deadline: this.taskDeadline ? this.taskDeadline?.valueOf() : null
-    }}))
+    if (!this.loading) {
+      this.store.dispatch(createTask({
+        dto: {
+          ...defaultTaskDto,
+          title: this.taskTitle,
+          deadline: this.taskDeadline ? this.taskDeadline?.valueOf() : null,
+        },
+      }));
+    }
   }
 
   changeFilter(link: string) {

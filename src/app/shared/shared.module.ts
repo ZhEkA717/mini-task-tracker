@@ -9,17 +9,18 @@ import { MatCardModule } from '@angular/material/card';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatDividerModule } from '@angular/material/divider';
 import { FormsModule } from '@angular/forms';
-import TaskDonePipe from './pipes/task-done.pipe';
-import { TaskOverduoPipe } from './pipes/task-overdue.pipe';
-import { TaskComePipe } from './pipes/task-come.pipe';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import TaskDonePipe from './pipes/task-done.pipe';
+import TaskOverduoPipe from './pipes/task-overdue.pipe';
+import TaskComePipe from './pipes/task-come.pipe';
 
 @NgModule({
   declarations: [
     TaskDonePipe,
     TaskOverduoPipe,
-    TaskComePipe
+    TaskComePipe,
   ],
   imports: [
     CommonModule,
@@ -33,6 +34,7 @@ import { MatInputModule } from '@angular/material/input';
     MatDividerModule,
     MatFormFieldModule,
     MatInputModule,
+    MatProgressBarModule,
   ],
   exports: [
     FormsModule,
@@ -47,7 +49,8 @@ import { MatInputModule } from '@angular/material/input';
     TaskOverduoPipe,
     TaskComePipe,
     MatFormFieldModule,
-    MatInputModule
+    MatInputModule,
+    MatProgressBarModule,
   ],
 })
 export default class SharedModule { }

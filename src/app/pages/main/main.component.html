@@ -1,3 +1,4 @@
+<mat-progress-bar *ngIf="loading" mode="indeterminate"></mat-progress-bar>
 <div class="container">
   <div class="main">
     <div class="main__data">{{date | date: 'EEEE, dd MMMM'}}</div>
@@ -35,7 +36,7 @@
         <app-task
           *ngFor="let task of tasks
           | taskDone: this.activeLink
-          | taskOverduo: this.activeLink
+          | taskOverdue: this.activeLink
           | taskCome: this.activeLink; index as i"
           [task]="task"
           (click)="openTask($event, task.id)"

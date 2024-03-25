@@ -6,12 +6,13 @@ export const defaultTaskDto: CreateTaskDto = {
   deadline: null,
   status: false,
   priority: 'low',
-  performers: [{
-    firstName: 'Zheka',
-    secondName: 'Grushevskiy'
-  },
-]
-}
+  performers: [
+    {
+      firstName: 'Zheka',
+      secondName: 'Grushevskiy',
+    },
+  ],
+};
 
 export type Task = {
   id: string
