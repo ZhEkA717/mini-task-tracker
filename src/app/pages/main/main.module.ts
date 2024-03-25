@@ -8,12 +8,14 @@ import MainRoutingModule from './main-routing.module';
 import MainComponent from './main.component';
 import TaskComponent from './components/task/task.component';
 import AddTaskComponent from './components/add-task/add-task.component';
+import TaskDetailComponent from './components/task-detail/task-detail.component';
 
 @NgModule({
   declarations: [
     MainComponent,
     TaskComponent,
     AddTaskComponent,
+    TaskDetailComponent,
   ],
   imports: [
     CommonModule,

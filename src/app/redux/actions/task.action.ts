@@ -6,6 +6,7 @@ export enum TaskAction {
   getAllTaskError = '[TASK] get all task error',
   getAllTaskSuccess = '[TASK] get  all task success',
 
+  saveTask = '[TASK] save task',
   getTask = '[TASK] get one task',
   getTaskError = '[TASK] get one task error',
   getTaskSuccess = '[TASK] get  one task success',
@@ -34,6 +35,10 @@ export const getAllTaskError = createAction(
   props<{ loading: boolean }>(),
 );
 // get one tasks
+export const saveTask = createAction(
+  TaskAction.saveTask,
+  props<{task: Task}>()
+);
 export const getTask = createAction(
   TaskAction.getTask,
   props<{id: string}>()

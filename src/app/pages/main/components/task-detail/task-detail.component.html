@@ -1,0 +1,43 @@
+<div class="container">
+  <mat-card *ngIf="task$ | async" class="task">
+    <div class="wrapper done">
+      <button
+        [ngClass]="{isDone: task.status}"
+        class="task__button"
+        (click)="updateTaskStatus()"
+      >✓ Done</button>
+      <div class="task__back" (click)="back()">back</div>
+    </div>
+    <input
+      class="task__title"
+      type="text"
+      [(ngModel)]="titleValue"
+      (keypress)="updateTaskPress($event)"
+      (blur)="updateTask()"
+    >
+    <div class="wrapper">
+      <span class="task__field">Performer</span>
+      <div class="task__performers" >
+        <div *ngFor="let item of task.performers; index as i" class="task__performer">
+          <div class="task__performer__icon">
+            {{item.firstName[0] + item.secondName[0]}}
+          </div>
+          <div class="task__performer__person">{{item.firstName + ' ' + item.secondName}}</div>
+          <div class="task__performer__close" (click)="deletePerformer(i)">+</div>
+        </div>
+      </div>
+    </div>
+    <div class="wrapper">
+      <span class="task__field">Deadline</span>
+      <div class="task__deadline">{{deadline ? (deadline | date: 'dd MMM') : 'There is no deadline' }}</div>
+    </div>
+
+    <div class="wrapper">
+      <span class="task__field">Name</span>
+      <mat-form-field appearance="fill">
+        <mat-label>Textarea</mat-label>
+        <textarea matInput></textarea>
+      </mat-form-field>
+    </div>
+  </mat-card>
+</div>

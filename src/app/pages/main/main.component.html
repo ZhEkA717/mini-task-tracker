@@ -31,15 +31,16 @@
         (inputControlEvent)="addFocus($event)"
         (blurEvent)="createTask($event )"
       ></app-add-task>
-      <div *ngIf="tasks$ | async as tasks">
+      <div class="wrapper-tasks" *ngIf="tasks$ | async as tasks">
         <app-task
           *ngFor="let task of tasks
-            | taskDone: this.activeLink
-            | taskOverduo: this.activeLink
-            | taskCome: this.activeLink"
+          | taskDone: this.activeLink
+          | taskOverduo: this.activeLink
+          | taskCome: this.activeLink; index as i"
           [task]="task"
+          (click)="openTask($event, task.id)"
           (statusEvent)="setStatus($event)"
-          ></app-task>
+        ></app-task>
       </div>
     </div>
   </div>

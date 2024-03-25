@@ -12,6 +12,8 @@ import { FormsModule } from '@angular/forms';
 import TaskDonePipe from './pipes/task-done.pipe';
 import { TaskOverduoPipe } from './pipes/task-overdue.pipe';
 import { TaskComePipe } from './pipes/task-come.pipe';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 
 @NgModule({
   declarations: [
@@ -29,6 +31,8 @@ import { TaskComePipe } from './pipes/task-come.pipe';
     MatCardModule,
     MatTabsModule,
     MatDividerModule,
+    MatFormFieldModule,
+    MatInputModule,
   ],
   exports: [
     FormsModule,
@@ -41,7 +45,9 @@ import { TaskComePipe } from './pipes/task-come.pipe';
     MatDividerModule,
     TaskDonePipe,
     TaskOverduoPipe,
-    TaskComePipe
+    TaskComePipe,
+    MatFormFieldModule,
+    MatInputModule
   ],
 })
 export default class SharedModule { }

@@ -1,7 +1,8 @@
 import { createReducer, on } from '@ngrx/store';
-import { createTask, createTaskError, createTaskSuccess, getAllTask, getAllTaskError, getAllTaskSuccess, getTask, getTaskError, getTaskSuccess, updateTask, updateTaskError, updateTaskSuccess } from '../actions/task.action';
+import { createTask, createTaskError, createTaskSuccess, getAllTask, getAllTaskError, getAllTaskSuccess, getTask, getTaskError, getTaskSuccess, saveTask, updateTask, updateTaskError, updateTaskSuccess } from '../actions/task.action';
 import { TaskState } from '../models/redux-states';
 import { Task } from 'src/app/shared/models/task.model';
+import { state } from '@angular/animations';
 
 export const TASK_REDUCER_KEY = 'task';
 
@@ -30,6 +31,11 @@ export const taskReducer = createReducer(
     loading: action.loading,
   })),
   // get task
+  on(saveTask, (state, action): TaskState => ({
+    ...state,
+    item: action.task,
+  })),
+
   on(getTask, (state): TaskState => ({
     ...state,
     loading: true,
@@ -75,6 +81,7 @@ export const taskReducer = createReducer(
         if (task.id === id) return action.item;
         return task;
       })],
+      item: action.item,
       loading: action.loading,
     }
   }),

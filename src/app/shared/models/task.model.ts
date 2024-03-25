@@ -1,12 +1,16 @@
 import { TypeUser } from './user.model';
 
-export const  defaultTaskDto: CreateTaskDto  = {
+export const defaultTaskDto: CreateTaskDto = {
   title: '',
   name: '',
   deadline: null,
   status: false,
   priority: 'low',
-  performers: []
+  performers: [{
+    firstName: 'Zheka',
+    secondName: 'Grushevskiy'
+  },
+]
 }
 
 export type Task = {
