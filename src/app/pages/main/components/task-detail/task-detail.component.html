@@ -29,14 +29,38 @@
     </div>
     <div class="wrapper">
       <span class="task__field">Deadline</span>
-      <div class="task__deadline">{{deadline ? (deadline | date: 'dd MMM') : 'There is no deadline' }}</div>
+      <div class="task__deadline">
+        <div class="task__deadline__toggle"  (click)="isVisible=!isVisible">
+          <mat-datepicker-toggle></mat-datepicker-toggle>
+        </div>
+        {{deadline ? (deadline | date: 'dd MMM') : 'There is no deadline' }}
+      </div>
     </div>
 
     <div class="wrapper">
+      <span class="task__field">Priority</span>
+      <mat-button-toggle-group
+        class="task__priority"
+        [(ngModel)]="taskPriority"
+        (click)="updatePriority()">
+        <mat-button-toggle value="low">Low</mat-button-toggle>
+        <mat-button-toggle value="medium">Medium</mat-button-toggle>
+        <mat-button-toggle value="high">High</mat-button-toggle>
+      </mat-button-toggle-group>
+    </div>
+
+    <mat-card *ngIf="isVisible" class="demo-inline-calendar-card">
+      <mat-calendar
+        (selectedChange)="select($event)"
+        [(selected)]="deadline"
+      ></mat-calendar>
+    </mat-card>
+
+    <div class="wrapper">
       <span class="task__field">Name</span>
-      <mat-form-field appearance="fill">
-        <mat-label>Textarea</mat-label>
-        <textarea matInput></textarea>
+      <mat-form-field class="task__name" appearance="fill">
+        <mat-label>Change name</mat-label>
+        <input [(ngModel)]="name" (change)="changeName(name)" matInput>
       </mat-form-field>
     </div>
     <button class="task__remove" mat-fab color="primary">

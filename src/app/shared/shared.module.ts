@@ -12,9 +12,12 @@ import { FormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatTableModule } from '@angular/material/table';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 import TaskDonePipe from './pipes/task-done.pipe';
 import TaskOverduoPipe from './pipes/task-overdue.pipe';
 import TaskComePipe from './pipes/task-come.pipe';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
 
 @NgModule({
   declarations: [
@@ -35,6 +38,9 @@ import TaskComePipe from './pipes/task-come.pipe';
     MatFormFieldModule,
     MatInputModule,
     MatProgressBarModule,
+    MatTableModule,
+    MatCheckboxModule,
+    MatButtonToggleModule,
   ],
   exports: [
     FormsModule,
@@ -51,6 +57,9 @@ import TaskComePipe from './pipes/task-come.pipe';
     MatFormFieldModule,
     MatInputModule,
     MatProgressBarModule,
+    MatTableModule,
+    MatCheckboxModule,
+    MatButtonToggleModule,
   ],
 })
 export default class SharedModule { }

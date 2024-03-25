@@ -18,8 +18,12 @@ export enum TaskAction {
   updateTask = '[TASK] update task',
   updateTaskSuccess = '[TASK] update task success',
   updateTaskError = '[TASK] update task error',
+
+  updateAllTask = '[TASK] update all task',
+  updateAllTaskSuccess = '[TASK] update all task success',
+  updateAllTaskError = '[TASK] update all task error',
 };
-// get all tasks
+// get all task
 export const getAllTask = createAction(
   TaskAction.getAllTask,
 );
@@ -34,7 +38,7 @@ export const getAllTaskError = createAction(
   TaskAction.getAllTaskError,
   props<{ loading: boolean }>(),
 );
-// get one tasks
+// get one task
 export const saveTask = createAction(
   TaskAction.saveTask,
   props<{task: Task}>()
@@ -54,7 +58,7 @@ export const getTaskError = createAction(
   TaskAction.getTaskError,
   props<{ loading: boolean }>(),
 );
-// create tasks
+// create task
 export const createTask = createAction(
   TaskAction.createTask,
   props<{dto: CreateTaskDto}>()
@@ -68,7 +72,7 @@ export const createTaskError = createAction(
   props<{loading: boolean}>()
 );
 
-// update tasks
+// update task
 export const updateTask = createAction(
   TaskAction.updateTask,
   props<{dto: UpdateTaskDto, id: string}>()
@@ -79,6 +83,20 @@ export const updateTaskSuccess = createAction(
 );
 export const updateTaskError = createAction(
   TaskAction.updateTaskError,
+  props<{loading: boolean}>()
+);
+
+// update alll tasks
+export const updateAllTask = createAction(
+  TaskAction.updateAllTask,
+  props<{ dto: Task[] }>()
+);
+export const updateAllTaskSuccess = createAction(
+  TaskAction.updateAllTaskSuccess,
+  props<{items: Task[], loading: boolean}>()
+);
+export const updateAllTaskError = createAction(
+  TaskAction.updateAllTaskError,
   props<{loading: boolean}>()
 );
 

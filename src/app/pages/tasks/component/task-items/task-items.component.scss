@@ -1,0 +1,18 @@
+:host {
+  width: 100%;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+table {
+  margin: 20px auto;
+  width: 100%;
+
+  tr.table__row {
+    transition: .3s;
+    cursor: pointer;
+    &:hover {
+      background: lightgrey;
+    }
+  }
+}

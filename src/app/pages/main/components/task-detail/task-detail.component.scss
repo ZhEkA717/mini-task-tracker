@@ -4,9 +4,14 @@
 
 .task {
   width: 80%;
+  min-height: 450px;
   margin: 20px auto;
   padding: 20px;
   position: relative;
+
+  @media (max-width: 550px) {
+    width: 100%;
+  }
 
   &__remove {
     position: absolute;
@@ -67,9 +72,22 @@
     gap: 100px;
     margin-bottom: 20px;
 
+    @media (max-width: 550px) {
+      gap: 20px;
+    }
+
     &.done {
       align-items: center;
       justify-content: space-between;
+    }
+  }
+
+  &__deadline {
+    display: flex;
+    gap: 10px;
+
+    &__toggle {
+      margin-top: -13px;
     }
   }
 
@@ -124,4 +142,21 @@
       }
     }
   }
+
+  &__priority {
+    margin-top: -10px;
+    margin-left: 13px;
+  }
+
+  &__name {
+    margin-left: 23px;
+  }
+}
+
+
+.demo-inline-calendar-card {
+  width: 300px;
+  position: absolute;
+  z-index: 1;
+  right: 0;
 }

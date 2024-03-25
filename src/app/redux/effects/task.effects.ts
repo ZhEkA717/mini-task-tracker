@@ -1,9 +1,9 @@
 import { Injectable } from "@angular/core";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
 import HttpApiService from "src/app/core/services/http-api.service";
-import { TaskAction, createTaskError, createTaskSuccess, getAllTaskError, getAllTaskSuccess, getTaskError, getTaskSuccess, updateTaskError, updateTaskSuccess } from "../actions/task.action";
+import { TaskAction, createTaskError, createTaskSuccess, getAllTaskError, getAllTaskSuccess, getTaskError, getTaskSuccess, updateAllTaskError, updateAllTaskSuccess, updateTaskError, updateTaskSuccess } from "../actions/task.action";
 import { catchError, map, mergeMap, of } from "rxjs";
-import { CreateTaskDto, UpdateTaskDto } from "src/app/shared/models/task.model";
+import { CreateTaskDto, Task, UpdateTaskDto } from "src/app/shared/models/task.model";
 
 @Injectable()
 export default class TaskEffect {
@@ -53,6 +53,18 @@ export default class TaskEffect {
         ),
       )),
     catchError(() => of(updateTaskError({loading: false}))),
+  ));
+
+  public updateAllTask$ = createEffect(() => this.actions$.pipe(
+    ofType(TaskAction.updateAllTask),
+    mergeMap(({ dto}:{ dto: Task[]}) => this.httpApiService
+      .updateAllTasks(dto)
+      .pipe(
+        map(
+          (tasks) => updateAllTaskSuccess({items: tasks, loading: false}),
+        ),
+      )),
+    catchError(() => of(updateAllTaskError({loading: false}))),
   ));
 
   constructor(

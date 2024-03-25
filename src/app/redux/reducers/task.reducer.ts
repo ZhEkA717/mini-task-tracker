@@ -1,6 +1,6 @@
 import { createReducer, on } from '@ngrx/store';
 import { Task } from 'src/app/shared/models/task.model';
-import { createTask, createTaskError, createTaskSuccess, getAllTask, getAllTaskError, getAllTaskSuccess, getTask, getTaskError, getTaskSuccess, saveTask, updateTask, updateTaskError, updateTaskSuccess } from '../actions/task.action';
+import { createTask, createTaskError, createTaskSuccess, getAllTask, getAllTaskError, getAllTaskSuccess, getTask, getTaskError, getTaskSuccess, saveTask, updateAllTask, updateAllTaskError, updateAllTaskSuccess, updateTask, updateTaskError, updateTaskSuccess } from '../actions/task.action';
 import { TaskState } from '../models/redux-states';
 
 export const TASK_REDUCER_KEY = 'task';
@@ -86,6 +86,23 @@ export const taskReducer = createReducer(
   }),
 
   on(updateTaskError, (state, action): TaskState => ({
+    ...state,
+    loading: action.loading,
+  })),
+
+  // update all task
+  on(updateAllTask, (state): TaskState => ({
+    ...state,
+    loading: true,
+  })),
+
+  on(updateAllTaskSuccess, (state, action): TaskState => ({
+    ...state,
+    items: action.items,
+    loading: action.loading,
+  })),
+
+  on(updateAllTaskError, (state, action): TaskState => ({
     ...state,
     loading: action.loading,
   }))

@@ -2,14 +2,18 @@ import { TypeUser } from './user.model';
 
 export const defaultTaskDto: CreateTaskDto = {
   title: '',
-  name: '',
+  name: 'task name',
   deadline: null,
   status: false,
   priority: 'low',
   performers: [
     {
-      firstName: 'Zheka',
+      firstName: 'Evgeniy',
       secondName: 'Grushevskiy',
+    },
+    {
+      firstName: 'Darya',
+      secondName: 'Grushevskay',
     },
   ],
 };
@@ -28,4 +32,4 @@ export type CreateTaskDto = Omit<Task, 'id'>;
 
 export type UpdateTaskDto = Partial<CreateTaskDto>;
 
-type TypePriority = 'low' | 'medium' | 'high';
+export type TypePriority = 'low' | 'medium' | 'high';
