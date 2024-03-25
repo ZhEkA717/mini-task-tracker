@@ -105,9 +105,9 @@ export default class TaskItemsComponent implements OnInit {
   }
 
   compareDate(a: number | null, b: number | null, isAsc: boolean) {
-    const distantFuture = new Date(8640000000000000)
-    let dateA = a ? new Date(a) : distantFuture;
-    let dateB = b ? new Date(b) : distantFuture;
+    const distantPast = new Date(0)
+    let dateA = a ? new Date(a) : distantPast;
+    let dateB = b ? new Date(b) : distantPast;
     return (dateA.valueOf() - dateB.valueOf()) * (isAsc ? 1 : -1);
   }
 }
