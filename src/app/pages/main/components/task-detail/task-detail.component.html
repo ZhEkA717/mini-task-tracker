@@ -63,7 +63,7 @@
         <input [(ngModel)]="name" (change)="changeName(name)" matInput>
       </mat-form-field>
     </div>
-    <button class="task__remove" mat-fab color="primary">
+    <button (click)="deleteTask()" class="task__remove" mat-fab color="primary">
       <mat-icon>delete</mat-icon>
     </button>
   </mat-card>

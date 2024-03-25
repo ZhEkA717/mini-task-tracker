@@ -23,4 +23,8 @@ export default class SidenavComponent {
   ];
 
   constructor(public headerService: HeaderService) {}
+
+  changePage() {
+    this.headerService.setNavBar(false);
+  }
 }

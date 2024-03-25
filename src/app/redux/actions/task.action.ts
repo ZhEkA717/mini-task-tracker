@@ -22,6 +22,10 @@ export enum TaskAction {
   updateAllTask = '[TASK] update all task',
   updateAllTaskSuccess = '[TASK] update all task success',
   updateAllTaskError = '[TASK] update all task error',
+
+  deleteTask = '[TASK] delete task',
+  deleteTaskSuccess = '[TASK] delete task success',
+  deleteTaskError = '[TASK] delete task error',
 };
 // get all task
 export const getAllTask = createAction(
@@ -97,6 +101,20 @@ export const updateAllTaskSuccess = createAction(
 );
 export const updateAllTaskError = createAction(
   TaskAction.updateAllTaskError,
+  props<{loading: boolean}>()
+);
+
+// delete  task
+export const deleteTask = createAction(
+  TaskAction.deleteTask,
+  props<{ id: string }>()
+);
+export const deleteTaskSuccess = createAction(
+  TaskAction.deleteTaskSuccess,
+  props<{id: string, loading: boolean}>()
+);
+export const deleteTaskError = createAction(
+  TaskAction.deleteTaskError,
   props<{loading: boolean}>()
 );
 

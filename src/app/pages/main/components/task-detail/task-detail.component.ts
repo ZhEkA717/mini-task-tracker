@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable, Subscription } from 'rxjs';
-import { updateTask } from 'src/app/redux/actions/task.action';
+import { deleteTask, updateTask } from 'src/app/redux/actions/task.action';
 import { selectLoading, selectTask } from 'src/app/redux/selectors/task.selector';
 import { Task, TypePriority } from 'src/app/shared/models/task.model';
 
@@ -138,6 +138,14 @@ export default class TaskDetailComponent implements OnInit, OnDestroy {
           title: this.titleValue,
           performers: arr,
         },
+        id: this.task.id,
+      }));
+    }
+  }
+
+  deleteTask() {
+    if (!this.loading) {
+      this.store.dispatch(deleteTask({
         id: this.task.id,
       }));
     }
