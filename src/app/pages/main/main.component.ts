@@ -31,6 +31,10 @@ export default class MainComponent implements OnInit, OnDestroy {
 
   tasks$: Observable<Task[]> = this.store.select(selectAllTasks);
 
+  tasks: Task[] = [];
+
+  subTask!: Subscription;
+
   loading$: Observable<boolean> = this.store.select(selectLoading);
 
   loading = false;
@@ -52,6 +56,10 @@ export default class MainComponent implements OnInit, OnDestroy {
       this.loading = loading;
     });
 
+    this.subTask = this.tasks$.subscribe((tasks) => {
+      this.tasks = [...tasks].reverse();
+    })
+
     this.timerId = setInterval(() => {
       this.date = new Date();
       this.getPeriod();
@@ -61,6 +69,7 @@ export default class MainComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     clearInterval(this.timerId);
     this.subLoading?.unsubscribe();
+    this.subTask?.unsubscribe();
   }
 
   openTask(event: Event, id: string) {
@@ -95,6 +104,7 @@ export default class MainComponent implements OnInit, OnDestroy {
   // eslint-disable-next-line class-methods-use-this
   addFocus(el: HTMLInputElement) {
     el.focus();
+    el.value = '';
   }
 
   createTask() {
